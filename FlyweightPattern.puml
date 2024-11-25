@@ -1,0 +1,58 @@
+@startuml
+object Document {
+    characters = List<Character>
+}
+
+object Character {
+    character = "H"
+    characterProperty = CharacterProperties
+}
+
+object CharacterProperties {
+    font = "Arial"
+    color = "Black"
+    size = 12
+}
+
+Document --> Character : contains
+Character --> CharacterProperties : uses
+
+note right of CharacterProperties : Properties are flyweight objects,\nshared if they have the same attributes.
+
+@enduml
+
+@startuml
+object Document {
+    characters = List<Character>
+}
+
+object CharacterH {
+    character = "H"
+    characterProperty = CharacterProperties1
+}
+
+object CharacterW {
+    character = "W"
+    characterProperty = CharacterProperties2
+}
+
+object CharacterProperties1 {
+    font = "Times New Roman"
+    color = "Red"
+    size = 14
+}
+
+object CharacterProperties2 {
+    font = "Calibri"
+    color = "Blue"
+    size = 16
+}
+
+Document --> CharacterH : contains
+Document --> CharacterW : contains
+CharacterH --> CharacterProperties1 : uses
+CharacterW --> CharacterProperties2 : uses
+
+note right of CharacterProperties1 : Modified properties for 'H'
+note right of CharacterProperties2 : Modified properties for 'W'
+@enduml
